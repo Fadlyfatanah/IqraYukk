@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "620857320671",
+    "firebase_url": "https://fadly-30aef.firebaseio.com",
+    "project_id": "fadly-30aef",
+    "storage_bucket": "fadly-30aef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620857320671:android:429bdfabb066b8750af56a",
+        "android_client_info": {
+          "package_name": "com.privateproject.iqrayukk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620857320671-jfag7bfphenmjj2ohab7jmiqu08vpl0l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjC558ExpugbfyUUaDVKHu8G0SWtunFd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620857320671-jfag7bfphenmjj2ohab7jmiqu08vpl0l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
