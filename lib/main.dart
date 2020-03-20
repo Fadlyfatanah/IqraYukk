@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'bgchome0.dart';
-import 'bgchome1.dart';
-import 'bgchome2.dart';
+import 'package:iqrayukk_v2/BgHome2.dart';
+import 'BgHome0.dart';
+import 'BgHome1.dart';
+import 'BgHome2.dart';
 
 void main() {
   runApp(new MaterialApp(
     initialRoute: '/',
     routes: {
       '/': (context) => MyApp(),
-      '/MenuNonton': (context) => Bgchome0(),
-      //'/MenuBelajar': (context) => Bgchome1(),
-      //'/MenuMain': (context) => Bgchome2(),
+      '/MenuNonton': (context) => BgHome0(),
+      '/MenuBelajar': (context) => BgHome1(),
+      '/MenuMain': (context) => BgHome2(200.0),
     },
   ));
 }
