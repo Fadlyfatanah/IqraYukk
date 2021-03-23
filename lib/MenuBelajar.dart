@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'iqra/ListIqra.dart';
 
 class MenuBelajar extends StatefulWidget {
   @override
@@ -6,16 +7,24 @@ class MenuBelajar extends StatefulWidget {
 }
 
 class _MenuBelajarState extends State<MenuBelajar> {
+
   @override
   Widget build(BuildContext context) {
     return Container(child: Builder(builder: (BuildContext context) {
       return GridView.count(
-        crossAxisCount: 2,
-        children: List.generate(6, (i) {
-          i+=1;
-          return Image.asset('assets/image/iqra$i-cover.png');
-        }),
-      );
+          crossAxisCount: 2,
+          children: List.generate(6, (i) {
+            ++i;
+            return ElevatedButton(
+                child: Image.asset('assets/image/cover/iqra$i-cover.png'),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return ListIqra(level: i);
+                    },
+                  ));
+                });
+          }));
     }));
   }
 }
