@@ -14,9 +14,8 @@ class _MenuBelajarState extends State<MenuBelajar> {
       return GridView.count(
           crossAxisCount: 2,
           children: List.generate(6, (i) {
-            ++i;
             return ElevatedButton(
-                child: Image.asset('assets/image/cover/iqra$i-cover.png'),
+                child: Image.asset('assets/image/cover/iqra${i+1}-cover.png'),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
                     builder: (BuildContext context) {

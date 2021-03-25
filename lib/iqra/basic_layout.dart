@@ -1,71 +1,56 @@
 import 'package:flutter/material.dart';
 
-
 class BasicLayout extends StatelessWidget {
-  final int row, col, level, index;
+  final int level;
   final double maxHeight, maxWidth;
-  final List alph;
-  final data;
-  BasicLayout({
-      this.index,
-      this.data,
-      this.level,
-      this.col,
-      this.row,
-      this.alph,
-      this.maxHeight,
-      this.maxWidth});
-
-
+  final Map<String, dynamic> data;
+  BasicLayout({this.data, this.level, this.maxHeight, this.maxWidth});
 
   @override
   Widget build(BuildContext context) {
-    // var datas = data['iqra$level']['page$index'];
-    // var rows = datas.length;
-    // var cols;
+    int row = data.length;
     return Scaffold(
       body: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: List.generate(8, (n) {
-            int indek = 1;
-            int flexs;
-                // List alph = data;
+          children: List.generate(row, (n) {
+            int flexs = 1;
+            String colIndex = data['row${n + 1}']['column'];
+            int col = int.parse(colIndex);
+            List alph = data['row${n + 1}']['alph'];
+            int index = -1;
+
             if (n == 0) {
               flexs = 2;
-            } else {
-              flexs = 1;
             }
             return Expanded(
-              flex: flexs,
-              child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          textDirection: TextDirection.rtl,
-          children: List.generate(2, (x) {
-            return Row(children: List.generate(indek, (y){
-              indek++;
-              return Container(
-                width: maxWidth * 0.1,
-                height: maxHeight * 0.12,
-                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                // color: Colors.cyan,
-                child: Image.asset(
-                    "assets/image/hijaiyah/a.png"), //dynamic index
-              );
-            })
-            );
-          }
-            )
-              )
-            );
-              
-          })
-          ),
+                flex: flexs,
+                child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    textDirection: TextDirection.rtl,
+                    children: List.generate(col, (x) {
+                      return Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          // mainAxisSize: MainAxisSize.max,
+                          textDirection: TextDirection.rtl,
+                          children: List.generate(alph.length ~/ col, (y) {
+                            index++;
+                            return Container(
+                                // width: maxWidth * 0.06,
+                                // height: maxHeight * 0.1,
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 4, vertical: 10),
+                                // color: Colors.cyan,
+                                child: Image.asset(
+                                    "assets/image/hijaiyah/${alph[index]}.png"), //dynamic index
+                            );
+                          }));
+                    })));
+          })),
     );
   }
 }
-
 
 // children: List.generate(col, (y) {
 //                     //dynamic index //perulangan untuk membuat kolom ke-2

@@ -1,50 +1,26 @@
 import 'package:flutter/material.dart';
 import 'basic_layout.dart';
-// import 'dart:convert';
+import 'dart:convert';
+
 
 class ListIqra extends StatelessWidget {
   final int level;
   // final List getData;
   ListIqra({this.level});
 
-  @override
-  Widget build(BuildContext context) {
-          return PageView.builder(
-            itemCount: 6,
-            itemBuilder: (BuildContext context, index) {
-              return LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                double maxHeight = constraints.maxHeight;
-                double maxWidth = constraints.maxWidth;
-                return Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                  child: BasicLayout(
-                    index: index,
-                    level: level,
-                    maxWidth: maxWidth,
-                    maxHeight: maxHeight,
-                  ),
-                );
-              });
-            },
-          );
-  }
+  // List<Iqra> parseJosn(String response) {
+  //   if(response==null){
+  //     return [];
+  //   }
+  //   final parsed =
+  //       json.decode(response.toString()).cast<Map<String, dynamic>>();
+  //   return parsed.map<Iqra>((json) => new Iqra.fromJson(json)).toList();
+  // }
 
   // @override
   // Widget build(BuildContext context) {
-  //   return FutureBuilder(
-  //       future: DefaultAssetBundle.of(context)
-  //     .loadString('data.json'),
-  //       builder: (context, snapshot) {
-  //         var data = json.decode(snapshot.data.toString());
-  //         Map iqraMap = jsonDecode(data);
-  //         var iqra = Iqra.fromJson(iqraMap);
-  //         var page = iqra.page;
-  //         // var list = data[1];
-  //         // var page = data['iqra1'];
   //         return PageView.builder(
-  //           itemCount: page == null ? 0 : page.length,
+  //           itemCount: 6,
   //           itemBuilder: (BuildContext context, index) {
   //             return LayoutBuilder(
   //                 builder: (BuildContext context, BoxConstraints constraints) {
@@ -55,11 +31,7 @@ class ListIqra extends StatelessWidget {
   //                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
   //                 child: BasicLayout(
   //                   index: index,
-  //                   data: data,
   //                   level: level,
-  //                   alph: iqra.alph,
-  //                   col: iqra.column,
-  //                   row: iqra.row,
   //                   maxWidth: maxWidth,
   //                   maxHeight: maxHeight,
   //                 ),
@@ -67,30 +39,74 @@ class ListIqra extends StatelessWidget {
   //             });
   //           },
   //         );
-  //       });
   // }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: DefaultAssetBundle.of(context).loadString('assets/data.json'),
+        builder: (context, snapshot) {
+          var dataJson = json.decode(snapshot.data.toString());
+          return dataJson != null
+              ? _listTile(dataJson)
+              : new Center(
+                  child: CircularProgressIndicator(),
+                );
+        });
+  }
+
+  Widget _listTile(List data) {
+    //   developer.log(
+    //   'log me',
+    //   name: 'my.app.category',
+    //   error: jsonEncode(data[0]['iqra1']['page1']['row1']),
+    // );
+    var page = data[level]['iqra${level+1}'];
+    return PageView.builder(
+      itemCount: page == null ? 0 : page.length,
+      itemBuilder: (context, index) {
+        return LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+          double maxHeight = constraints.maxHeight;
+          double maxWidth = constraints.maxWidth;
+          return Container(
+            color: Colors.white,
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+            child: BasicLayout(
+              data: page['page${index+1}'],
+              level: level,
+              maxWidth: maxWidth,
+              maxHeight: maxHeight,
+            ),
+          );
+        });
+      },
+    );
+  }
 }
 
-class Iqra {
-  final String iqra, page;
-  final int row, column;
-  final List<String> alph;
+// class Iqra {
+//   final String iqra;
+//   final String page;
+//   final String row, column,alph;
 
-  Iqra(this.iqra, this.page, this.alph, this.column, this.row);
+//   Iqra({this.iqra, this.page, this.alph, this.column, this.row});
 
-  Iqra.fromJson(Map<String, dynamic> json)
-      : iqra = json['iqra1'],
-        page = json['iqra1']['page1'],
-        row = json['iqra1']['page1']['row1'],
-        column = json['iqra1']['page1']['row1']['column'],
-        alph = json['iqra1']['page1']['row1']['alph'];
+//   factory Iqra.fromJson(Map<String, dynamic> json){
+//     return new Iqra(
+//         iqra: json['iqra1'] as String,
+//         page: json['iqra1']['page1'] as String,
+//         alph: json['iqra1']['page1']['row1']['alph'] as String,
+//         column: json['iqra1']['page1']['row1']['column'] as String,
+//         row: json['iqra1']['page1']['row1'] as String,
+//     );
+//   }
 
-  Map<String, dynamic> toJson() =>
-    {
-      'iqra1': iqra,
-      'page1': page,
-      'row1': row,
-      'column': column,
-      'alph': alph
-    };
-}
+// Map<String, dynamic> toJson() => {
+//       'iqra1': iqra,
+//       'page1': page,
+//       'row1': row,
+//       'column': column,
+//       'alph': alph
+//     };
+// }
