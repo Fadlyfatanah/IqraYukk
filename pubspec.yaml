@@ -44,11 +44,13 @@ flutter:
   uses-material-design: true
   assets:
     - assets/image/background/
-    - assets/image/halaman/
     - assets/image/cover/
-    - assets/image/hijaiyah/
-    - assets/image/
     - assets/data.json
+  
+  fonts:
+    - family: Lateef
+      fonts:
+        - asset: assets/fonts/Lateef-Regular.ttf
 
   # To add assets to your application- add an assets section- like this:
   # assets:

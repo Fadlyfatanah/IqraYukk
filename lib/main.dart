@@ -8,7 +8,8 @@ void main() {
     '/MenuNonton': (BuildContext context) => MenuNonton(),
     '/MenuBelajar': (BuildContext context) => MenuBelajar(),
     '/MenuMain': (BuildContext context) => MenuMain(),
-  }));
+  }, theme: ThemeData(),)
+  );
 }
 
 // ignore: must_be_immutable
